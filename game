@@ -1,0 +1,101 @@
+''' provide your own word bank as a list, then define functions to reduce repetitive code, then set game up using while loops and conditional statements'''
+
+import random # use this later
+
+wordbank = ['the','quick','brown','fox','jumps','over','lazy','dog']
+
+# need to choose answer randomly from wordbank
+def choose_random():
+  word=random.choice(wordbank)
+  return word
+  
+# need to display progress for after each guess; include length of word
+def display(word):
+  progress=[]
+  for char in word:
+    progress.append("_")
+  res=progress,len(progress)
+  return res
+
+# need player input to guess each letter
+def player_input():
+  guess=input("Guess a letter of the word: ").lower()
+  while len(guess)!=1:
+    guess=input("Guess a letter of the word: ")
+  return guess
+
+# need to see if letter in word; return boolean
+def check_if(letter,word):
+  return letter in word
+
+# find indices of the letter in word; to be used to display letter in progress
+# this should match the index of the letter in the answer to transpose in 'progress' variable
+def find_index(letter,word):
+  indices=[]
+  if letter in word:
+    for i in range(len(word)):
+      if letter==word[i]
+        indices.append(i)
+  return indices
+  
+# see if game is over
+def is_win(word):
+  if "_" in word:
+    return False
+  return True
+  
+# play the game
+print("Welcome to hangman. The computer will choose a random word from the wordbank.\nYour job is to guess the word in as few guesses as possible.\nThe computer will count your guesses!")
+
+while True:
+
+  # keep track of guesses, and initiate the answer, its qualities, and something to keep progress
+  total=0
+  answer=choose_answer()
+  progress=''
+  hidden,length=display(answer)
+  
+  # make game playable
+  play_game=input("Are you ready to play? Y/N: ").lower()[0]
+  if play_game=='y':
+    game_on=True
+  else:
+    game_on=False
+  
+  while game_on:
+    
+    # display word and length
+    print(hidden)
+    print("Answer length: ",display(answer)[1], "characters")
+    
+    guess = player_input()
+    total+=1
+    
+    # check if guess was right
+    if check_if(guess,answer):
+    
+      for elem in find_index(guess,answer):
+        hidden[elem]=guess
+      print("\n")
+      print("Total guesses so far: "+str(total))
+      
+      # check if game was won
+      if is_win(hidden):
+        print("\n")
+        print("Congratulations! You beat hangman!")
+        print("Total guesses: " + str(total))
+        game_on=False
+       
+      # if guess was right but not won
+      else:
+        print("\n")
+        hidden
+        continue
+        
+      # if guess was wrong
+      else:
+        print("\n")
+        print("Try again.")
+        print(Total guesses so far: + str(total))
+        display(hidden)
+        continue
